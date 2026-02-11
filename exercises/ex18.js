@@ -24,7 +24,40 @@ Create a function named squareCode that will receive a message, and return the s
 
 const squareCode = function (message) {
   // Put your solution here
+
+  // remove the space:
+  // const clean = message.split(" ").join("");
+  const clean = message.replaceAll(" ","");
+  
+  // how many cols needed?
+  const cols = Math.ceil(Math.sqrt(clean.length));
+
+  // build the matrix
+  const matrix = [];
+  for (let i = 0; i < clean.length; i+=cols){
+    matrix.push(clean.slice(i,i+cols))
+  };
+
+  // read cols
+  const encoded = [];
+  for (let col = 0; col < cols; col++){
+    let word = "";
+    for (let row =0; row < matrix.length; row++){
+      // console.log(`matrix[row][col]`,matrix[row][col]);
+      if (matrix[row][col]){
+        word += matrix[row][col]
+      }
+    }
+    encoded.push(word);
+  }
+  return encoded.join(" ");
+
 };
+
+// Space Complexity: O(n) n is the size of input
+// Time Complexity: O(n); n is the size of input
+
+
 
 console.log(squareCode("chill out")); // clu hlt io
 console.log(squareCode("feed the dog")); // fto ehg ee dd
