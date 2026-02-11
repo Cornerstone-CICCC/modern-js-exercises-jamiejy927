@@ -10,7 +10,21 @@ Create a function named organizeInstructors that will receive an array of instru
 
 const organizeInstructors = function (instructors) {
   // Put your solution here
+  let organized = {};
+
+  for (const instructor of instructors) {
+    if (organized[instructor.course]) {
+      organized[instructor.course].push(instructor.name);
+    } else {
+      organized[instructor.course] = [instructor.name];
+    }
+  }
+
+  return organized;
 };
+
+// Space Complexity: O(n) where n is the input size;
+// Time Complexity: size of input;
 
 console.log(
   organizeInstructors([
