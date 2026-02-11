@@ -9,7 +9,22 @@ Create a function named multiplicationTable that receives a number maxValue as i
 
 const multiplicationTable = function (maxValue) {
   // Your code here
+  let table = "";
+
+  for (let i = 1; i <= maxValue; i++){
+    for(let j = 1; j <= maxValue; j++){
+      let tempValue = i*j;
+      table += tempValue + " "
+    }
+    table = table.trim() + "\n";
+  }
+
+  return table.trim();
+
 };
+
+// Space / Memory Complexity : O(n) * O(n) == O(n^2); n is the maxValue
+// Time Complexity           : O(n) * O(n) == O(n^2); n is the maxValue
 
 console.log(multiplicationTable(1));
 // 1
