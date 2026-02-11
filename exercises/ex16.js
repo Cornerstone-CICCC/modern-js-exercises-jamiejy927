@@ -17,7 +17,104 @@ For more information on casing styles, read Wikipedia's Special Case Styles for 
 
 const makeCaze = function (input, caze) {
   // Put your solution here
+ if (!Array.isArray(caze)) {
+    caze = [caze];
+  }
+
+  const firstPriority = ["camel", "pascal", "snake", "kebab", "title"];
+  const secondPriority = ["vowel", "consonant"];
+  const thirdPriority = ["upper", "lower"];
+
+  let result = input;
+
+  const applyCaze = (style) => {
+
+    const words = result.split(" ");
+
+    switch (style) {
+
+      case "camel":
+        result = words
+          .map((word, index) =>
+            index === 0
+              ? word.toLowerCase()
+              : word[0].toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join("");
+        break;
+
+      case "pascal":
+        result = words
+          .map(word =>
+            word[0].toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join("");
+        break;
+
+      case "snake":
+        result = words.join("_");
+        break;
+
+      case "kebab":
+        result = words.join("-");
+        break;
+
+      case "title":
+        result = words
+          .map(word =>
+            word[0].toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(" ");
+        break;
+
+      case "vowel":
+        result = result.replace(/[aeiou]/gi, char =>
+          char.toUpperCase()
+        );
+        break;
+
+      case "consonant":
+        result = result.replace(/[^aeiou\s]/gi, char =>
+          char.toUpperCase()
+        );
+        break;
+
+      case "upper":
+        result = result.toUpperCase();
+        break;
+
+      case "lower":
+        result = result.toLowerCase();
+        break;
+    }
+  };
+
+  // 1️⃣ first priority
+  for (const style of firstPriority) {
+    if (caze.includes(style)) {
+      applyCaze(style);
+    }
+  }
+
+  // 2️⃣ second priority
+  for (const style of secondPriority) {
+    if (caze.includes(style)) {
+      applyCaze(style);
+    }
+  }
+
+  // 3️⃣ third priority
+  for (const style of thirdPriority) {
+    if (caze.includes(style)) {
+      applyCaze(style);
+    }
+  }
+
+  return result;
 };
+
+// Space Complexity: ?? O(R*n) ; R is the size of array caze,;
+// Time Complexity: O(n) n is the size of string input;
 
 console.log(makeCaze("this is a string", "camel")); // thisIsAString
 console.log(makeCaze("this is a string", "pascal")); // ThisIsAString
