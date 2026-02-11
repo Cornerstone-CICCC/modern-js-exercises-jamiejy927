@@ -10,7 +10,18 @@ Create a function named camelCase that will convert a string to camel case, and 
 
 const camelCase = function (input) {
   // Your code here
+  let wordsArray = input.split(" ");
+
+  for(let i=1; i<wordsArray.length;i++){
+
+    wordsArray[i] = wordsArray[i][0].toUpperCase() + wordsArray[i].slice(1);
+  }
+
+  return wordsArray.join("")
 };
+
+// Space / Memory Complexity : O(n) ; n is the size of the input
+// Time Complexity           : O(n) ; m is the size of the input
 
 console.log(camelCase("this is a string")); // thisIsAString
 console.log(camelCase("loopy cornerstone")); //loopyCornerstone
